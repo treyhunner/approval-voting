@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>Easy Approval Voting</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -30,10 +31,10 @@
 
     <form
       x-data="{
-        choices: [{name: ''}],
-        choicesDone: false,
-        people: [{name: ''}],
-        peopleDone: false,
+        choices: $persist([{name: ''}]),
+        choicesDone: $persist(false),
+        people: $persist([{name: ''}]),
+        peopleDone: $persist(false),
         currentVoter: null,
         completedVoters: new Set(),
         votes: {},
