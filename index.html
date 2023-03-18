@@ -360,45 +360,53 @@
               >
               </button>
 
-              <button
-                x-on:click.prevent="resetChoices();"
-                class="
-                  float-right
-                  ml-4
-                  rounded
-                  bg-indigo-50
-                  py-1
-                  px-2
-                  text-sm
-                  font-semibold
-                  text-indigo-600
-                  shadow-sm
-                  hover:bg-indigo-100
-                  focus-visible:outline100
-                "
-              >
-              Reset choices
-              </button>
+              <span class="float-right">
+                <button
+                  x-on:click.prevent="
+                    if (confirm('Want to reset the choices?')) {
+                      resetChoices();
+                    }
+                  "
+                  class="
+                    rounded
+                    bg-indigo-50
+                    py-1
+                    px-2
+                    text-sm
+                    font-semibold
+                    text-indigo-600
+                    shadow-sm
+                    hover:bg-indigo-100
+                    focus-visible:outline100
+                  "
+                >
+                Reset choices
+                </button>
 
-              <button
-                x-on:click.prevent="resetPeople();"
-                class="
-                  float-right
-                  ml-4
-                  rounded
-                  bg-indigo-50
-                  py-1
-                  px-2
-                  text-sm
-                  font-semibold
-                  text-indigo-600
-                  shadow-sm
-                  hover:bg-indigo-100
-                  focus-visible:outline100
-                "
-              >
-              Reset People
-              </button>
+                <button
+                  x-on:click.prevent="
+                    if (confirm('Want to reset the voters?')) {
+                      resetPeople();
+                    }
+                  "
+                  class="
+                    ml-2
+                    md:ml-4
+                    rounded
+                    bg-indigo-50
+                    py-1
+                    px-2
+                    text-sm
+                    font-semibold
+                    text-indigo-600
+                    shadow-sm
+                    hover:bg-indigo-100
+                    focus-visible:outline100
+                  "
+                >
+                Reset voters
+                </button>
+              </span>
 
             </td>
           </tr>
