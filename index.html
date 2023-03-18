@@ -5,6 +5,16 @@
   <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // ChatGPT wrote this. Let's pretend it's good enough.
+    function isLikelyMobileDevice() {
+      const hasTouchSupport = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const screenSizeThreshold = 768; // pixels
+      const isSmallScreen = Math.min(screen.width, screen.height) < screenSizeThreshold;
+      const isHighDensityDisplay = window.devicePixelRatio > 1;
+      return hasTouchSupport && isSmallScreen && isHighDensityDisplay;
+    }
+  </script>
   <meta name="viewport" content="width=device-width">
 </head>
 <body>
@@ -119,6 +129,12 @@
         x-trap="choicesDone && peopleDone && !votingDone"
         x-on:keydown.up="$focus.wrap().previous()"
         x-on:keydown.down="$focus.wrap().next()"
+        x-on:keydown.enter="
+          if (isLikelyMobileDevice()) {
+            $focus.wrap().next();
+            $event.preventDefault();
+          }
+        "
       >
         <thead class="text-lg">
           <tr>
