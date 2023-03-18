@@ -126,7 +126,7 @@
     >
       <table
         class="min-w-full divide-y divide-gray-300"
-        x-trap="choicesDone && peopleDone && !votingDone"
+        x-trap="true"
         x-on:keydown.up="$focus.wrap().previous()"
         x-on:keydown.down="$focus.wrap().next()"
         x-on:keydown.enter="
@@ -308,35 +308,39 @@
             </template>
             </tr>
           </template>
+          <tr>
+            <td x-bind:colspan="people.length + 2">
+              <button
+                type="submit"
+                x-text="
+                  !choicesDone ? `That's all the choices` : `That's all the people`
+                "
+                x-on:click.prevent="
+                  if (!choicesDone && choices.some(c => c.name !== '')) {
+                    finishChoices();
+                  } else if (people.some(p => p.name !== '')) {
+                    finishPeople();
+                  }
+                "
+                x-show="!choicesDone || !peopleDone"
+                class="
+                  rounded
+                  bg-indigo-600
+                  py-1
+                  px-2
+                  text-lg
+                  font-semibold
+                  text-white
+                  shadow-sm
+                  hover:bg-indigo-500
+                  focus-visible:outline100
+                "
+              >
+              </button>
+            </td>
+          </tr>
         </tbody>
       </table>
-      <button
-        type="submit"
-        x-text="
-          !choicesDone ? `That's all the choices` : `That's all the people`
-        "
-        x-on:click.prevent="
-          if (!choicesDone && choices.some(c => c.name !== '')) {
-            finishChoices();
-          } else if (people.some(p => p.name !== '')) {
-            finishPeople();
-          }
-        "
-        x-show="!choicesDone || !peopleDone"
-        class="
-          rounded
-          bg-indigo-600
-          py-1
-          px-2
-          text-lg
-          font-semibold
-          text-white
-          shadow-sm
-          hover:bg-indigo-500
-          focus-visible:outline100
-        "
-      >
-      </button>
   </div>
 </body>
 </html>
