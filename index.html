@@ -166,6 +166,12 @@
                         if (index === 0 && people.length < 2) $nextTick(() => $el.focus());
                         addExtraPerson(person, index);
                       "
+                      x-on:blur="
+                        newElement = $event.relatedTarget;
+                        if (!newElement || (newElement.tagName != 'INPUT' && newElement.tagName != 'BUTTON')) {
+                          finishPeople();
+                        }
+                      "
                       class="w-32"
                     >
                   </template>
@@ -260,12 +266,18 @@
         <tbody class="text-lg">
           <template x-for="(choice, index) in choices">
             <tr>
-            <td class="whitespace-nowrap py-4 pl-4 pr-3 font-medium text-gray-900 sm:pl-0">
+            <td class="py-4 pl-4 pr-3 font-medium text-gray-900 sm:pl-0">
               <template x-if="!choicesDone">
                 <input
                   x-model="choice.name"
                   x-on:input="addExtraChoice(choice, index)"
                   x-bind:placeholder="`Option ${index+1}`"
+                  x-on:blur="
+                    newElement = $event.relatedTarget;
+                    if (!newElement || (newElement.tagName != 'INPUT' && newElement.tagName != 'BUTTON')) {
+                      finishChoices();
+                    }
+                  "
                   x-show="!choicesDone"
                   x-init="
                     if (index === 0 && choices.length < 2) $nextTick(() => $el.focus());
