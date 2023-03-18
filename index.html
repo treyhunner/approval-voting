@@ -121,7 +121,17 @@
           for (const name of Object.getOwnPropertyNames(this.totals)) {
             delete this.totals[name];
           }
-        }
+        },
+        resetPeople() {
+          this.resetVotes();
+          this.people = [{name: ''}];
+          this.peopleDone = false;
+        },
+        resetChoices() {
+          this.resetVotes();
+          this.choices = [{name: ''}];
+          this.choicesDone = false;
+        },
       }"
     >
       <table
@@ -337,6 +347,47 @@
                 "
               >
               </button>
+
+              <button
+                x-on:click.prevent="resetChoices();"
+                class="
+                  float-right
+                  ml-4
+                  rounded
+                  bg-indigo-50
+                  py-1
+                  px-2
+                  text-sm
+                  font-semibold
+                  text-indigo-600
+                  shadow-sm
+                  hover:bg-indigo-100
+                  focus-visible:outline100
+                "
+              >
+              Reset choices
+              </button>
+
+              <button
+                x-on:click.prevent="resetPeople();"
+                class="
+                  float-right
+                  ml-4
+                  rounded
+                  bg-indigo-50
+                  py-1
+                  px-2
+                  text-sm
+                  font-semibold
+                  text-indigo-600
+                  shadow-sm
+                  hover:bg-indigo-100
+                  focus-visible:outline100
+                "
+              >
+              Reset People
+              </button>
+
             </td>
           </tr>
         </tbody>
